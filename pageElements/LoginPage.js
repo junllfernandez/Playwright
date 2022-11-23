@@ -4,10 +4,16 @@ exports.LoginPage = class LoginPage {
 
     constructor(page) {
         this.page = page;
-        this.usernameField = page.getByRole('textbox', { name: 'Email*' })
-        this.passwordField = page.getByRole('textbox', { name: 'Password*' });
-        this.submitBtn = page.getByRole('button', { name: 'Sign In' });
+        this.loginLogo = page.locator('.login_logo');
+        this.usernameField = page.locator('[data-test="username"]');
+        this.passwordField = page.locator('[data-test="password"]');
+        this.submitBtn = page.locator('[data-test="login-button"]');
+        this.errorMsg = page.locator('[data-test="error"]');
 
+    }
+
+    async confirmPageLoaded() {
+        await expect(this.loginLogo).toBeVisible();
     }
 
     async typeUsername(username) {
@@ -22,5 +28,13 @@ exports.LoginPage = class LoginPage {
 
     async clickSubmitBtn() {
         await this.submitBtn.click();
+    }
+
+    async invalidCredentialsErrorMsg() {
+        await expect(this.errorMsg).toHaveText("Epic sadface: Username and password do not match any user in this service");
+    }
+
+    async lockedUserErrorMsg() {
+        await expect(this.errorMsg).toHaveText("Epic sadface: Sorry, this user has been locked out.");
     }
 }
