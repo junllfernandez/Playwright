@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run:test:headless": "npx playwright test",
-    "run:test:headed": "npx playwright test --headed",
-    "run:debug": "npx playwright test --debug",
+    "test:headless": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "debug": "npx playwright test --debug",
     "report": "npx playwright show-report"
 
   },
